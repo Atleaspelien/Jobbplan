@@ -1,0 +1,48 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta charset='utf-8' />
+    <link href="~/Content/InnloggingStil.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+@model Jobbplan.Models.Bruker.LogInn
+@{
+    Layout = null;
+}
+
+<body id="innhold">
+
+    @Html.ValidationSummary(true, "Ikke gyldig brukernavn og/ eller passord", new { @class = "text-danger" })
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div id="logginnskjema">
+            <img src="~/Content/jp.jpg" alt="Logo" id="Logo" width="267" height="248" />
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Brukernavn, new { id = "brukernavntxt", placeholder = "Brukernavn" })
+                @Html.ValidationMessageFor(m => m.Brukernavn, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="input-group">
+                @Html.PasswordFor(m => m.Passord, new { id = "passordtxt", placeholder = "Passord" })
+                @Html.ValidationMessageFor(m => m.Passord, "", new { @class = "text-danger" })
+            </div>
+
+            <input type="submit" id="LogginnKnapp" value="LOGG INN" />
+            <br />
+            <br />
+            @Html.ActionLink("Registrer ny bruker", "Kalender", "Hjem", new { area = "" })
+        </div>
+    }
+</body>
+</html>
+
